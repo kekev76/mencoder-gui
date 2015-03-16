@@ -3,17 +3,19 @@ package com.kekev.mencoder.entity;
 public class Video {
 	
 	private String title;
-	private String subTitle;
-	private String pathToVideo;
-	private String pathToSub;
+	private Subtitle sub;
+	private static String pathToVideo;
 	private boolean ending = false;
 
-	public Video(String title, String subTitle) {
+	public Video(String title) {
 		super();
 		this.title = title;
-		this.subTitle = subTitle;
-		this.pathToVideo = pathToVideo;
-		this.pathToSub = pathToSub;
+	}
+	
+	public Video(String title, Subtitle sub) {
+		super();
+		this.title = title;
+		this.sub = sub;
 	}
 
 	public String getTitle() {
@@ -24,30 +26,13 @@ public class Video {
 		this.title = title;
 	}
 
-	public String getSubTitle() {
-		return subTitle;
-	}
-
-	public void setSubTitle(String subTitle) {
-		this.subTitle = subTitle;
-	}
-
-	public String getPathToVideo() {
+	public static String getPathToVideo() {
 		return pathToVideo;
 	}
 
-	public void setPathToVideo(String pathToVideo) {
-		this.pathToVideo = pathToVideo;
+	public static void setPathToVideo(String pathToVideo) {
+		Video.pathToVideo = pathToVideo;
 	}
-
-	public String getPathToSub() {
-		return pathToSub;
-	}
-
-	public void setPathToSub(String pathToSub) {
-		this.pathToSub = pathToSub;
-	}
-
 	
 	public boolean isEnding() {
 		return ending;
@@ -57,4 +42,11 @@ public class Video {
 		this.ending = ending;
 	}
 
+	public Subtitle getSub() {
+		return sub;
+	}
+
+	public void setSub(Subtitle sub) {
+		this.sub = sub;
+	}
 }

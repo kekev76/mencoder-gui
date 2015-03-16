@@ -3,6 +3,7 @@ package com.kekev.mencoder.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kekev.mencoder.entity.Subtitle;
 import com.kekev.mencoder.entity.Video;
 
 public class VideoService {
@@ -12,7 +13,7 @@ public class VideoService {
 	private List<Video> videos;
 	
 	private VideoService(){
-		
+		videos = new ArrayList<Video>();
 	}
 	
 	public static synchronized VideoService getInstance(){
@@ -23,26 +24,15 @@ public class VideoService {
 	}
 	
 	public synchronized List<Video> findLastVideo(){
-		chargerListe();
 		return videos;
 	}
 	
-	private void chargerListe(){
-		if(videos != null){
-			return;
-		}
-		
-		videos = new ArrayList<Video>();
-		
-		addVideo("test1", "subTest1");
-		addVideo("test2", "subTest2");
-		addVideo("test3", "subTest3");
-		addVideo("test4", "subTest4");
-		addVideo("test5", "subTest5");
+	public synchronized void addVideo(String title, String subTitle){
+		videos.add(new Video(title, new Subtitle(subTitle)));		
 	}
 	
-	private void addVideo(String title, String subTitle){
-		videos.add(new Video(title, subTitle));		
+	public synchronized void addVideo(Video video){
+		videos.add(video);
 	}
 
 }

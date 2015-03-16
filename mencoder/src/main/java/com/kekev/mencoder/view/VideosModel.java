@@ -49,7 +49,9 @@ public class VideosModel extends AbstractTableModel {
 		case 0:
 			return videos.get(rowIndex).getTitle();
 		case 1:	
-			return videos.get(rowIndex).getSubTitle();	
+			if(videos.get(rowIndex).getSub() != null)
+				return videos.get(rowIndex).getSub().getTitle();
+			return "";
 		case 2:	
 			return videos.get(rowIndex).isEnding();		
 

@@ -17,15 +17,20 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
 
+import com.kekev.mencoder.view.action.MenuAction;
+
 public class Fenetre {
 
 	private static final String TITLE = "mencoder";
 	
 	private VideosModel model;
 	private JTable table;
+	private JFrame frame;
+	
+	public static Fenetre fenetre;
 	
 	public Fenetre(){
-		JFrame frame = new JFrame(TITLE);
+		frame = new JFrame(TITLE);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		frame.setSize(100, 100);
@@ -45,8 +50,13 @@ public class Fenetre {
 		
 		//5. Show it.
 		frame.setVisible(true);
+		
+		fenetre = this;
 	}
 	
+	public static void update(){
+		fenetre.model.fireTableDataChanged();
+	}
 	
 	private JMenuBar createMenuBar(){
 		JMenuBar menuBar = new JMenuBar();
@@ -59,12 +69,31 @@ public class Fenetre {
 		JMenuItem menuItem = new JMenuItem("Add Videos", KeyEvent.VK_T);
 		menuItem.setAccelerator(KeyStroke.getKeyStroke(
 		KeyEvent.VK_1, ActionEvent.ALT_MASK));
+		menuItem.addActionListener(new MenuAction(frame));
 		menu.add(menuItem);
 		
-		menuItem = new JMenuItem("Add subs", KeyEvent.VK_T);
+		menuItem = new JMenuItem("Add Subs", KeyEvent.VK_T);
 		menuItem.setAccelerator(KeyStroke.getKeyStroke(
-		KeyEvent.VK_1, ActionEvent.ALT_MASK));
+		KeyEvent.VK_2, ActionEvent.ALT_MASK));
+		menuItem.addActionListener(new MenuAction(frame));
 		menu.add(menuItem);
+		
+
+		menu = new JMenu("Start");
+		menu.setMnemonic(KeyEvent.VK_S);
+		
+		menuItem = new JMenuItem("Retrieve", KeyEvent.VK_T);
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(
+		KeyEvent.VK_2, ActionEvent.ALT_MASK));
+		menuItem.addActionListener(new MenuAction(frame));
+		menu.add(menuItem);
+		
+		menuItem = new JMenuItem("Convert", KeyEvent.VK_T);
+		menuItem.setAccelerator(KeyStroke.getKeyStroke(
+		KeyEvent.VK_2, ActionEvent.ALT_MASK));
+		menuItem.addActionListener(new MenuAction(frame));
+		menu.add(menuItem);
+		menuBar.add(menu);
 		
 		return menuBar;
 	}
