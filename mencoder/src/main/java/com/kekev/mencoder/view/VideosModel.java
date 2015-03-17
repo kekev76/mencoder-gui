@@ -2,6 +2,7 @@ package com.kekev.mencoder.view;
 
 import java.util.List;
 
+import javax.swing.JProgressBar;
 import javax.swing.table.AbstractTableModel;
 
 import com.kekev.mencoder.entity.Video;
@@ -9,7 +10,7 @@ import com.kekev.mencoder.services.VideoService;
 
 public class VideosModel extends AbstractTableModel {
 	
-	private final String[] head = {"Video","Subtitle","Ending"};
+	private final String[] head = {"Video","Subtitle","Ending","Status"};
 	
 	private VideoService videoService;
 	private List<Video> videos;
@@ -55,12 +56,14 @@ public class VideosModel extends AbstractTableModel {
 		case 2:	
 			return videos.get(rowIndex).isEnding();		
 
+		case 3:
+			return videos.get(rowIndex).getStatus();
 		default:
 			throw new IllegalArgumentException();
 		}
 	}
 	
-	@Override
+	/*@Override
 	public Class<?> getColumnClass(int columnIndex) {
 		switch (columnIndex) {
 			case 0:
@@ -68,10 +71,12 @@ public class VideosModel extends AbstractTableModel {
 			case 1:
 				return String.class;	
 			case 2:
-				return Boolean.class;	
+				return Boolean.class;
+			case 3:
+				return In
 			default:
 				return Object.class;
 		}
-	}
+	}*/
 
 }

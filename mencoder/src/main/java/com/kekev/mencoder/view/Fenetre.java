@@ -49,6 +49,7 @@ public class Fenetre {
 		model = new VideosModel();
 		
 		table = new JTable(model);
+		table.getColumn("Status").setCellRenderer(new ProgressCellRender());
 
 		frame.getContentPane().add(new JScrollPane(table), BorderLayout.CENTER);
 		

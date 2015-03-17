@@ -3,12 +3,15 @@ package com.kekev.mencoder.entity;
 import java.io.File;
 import java.io.FileFilter;
 
+import com.kekev.mencoder.view.Fenetre;
+
 public class Video implements Comparable<Video>{
 	
 	private String title;
 	private Subtitle sub;
 	private State state;
 	private Episode episode;
+	private int status;
 	private static String pathToVideo;
 	private boolean ending = false;
 
@@ -97,6 +100,15 @@ public class Video implements Comparable<Video>{
 
 	public void setEpisode(Episode episode) {
 		this.episode = episode;
+	}
+	
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+		Fenetre.update();
 	}
 
 	@Override

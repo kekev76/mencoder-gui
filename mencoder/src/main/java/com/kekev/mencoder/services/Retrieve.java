@@ -53,26 +53,26 @@ public class Retrieve {
 			if(fichier.endsWith(".srt")){
 				Subtitle sub = new Subtitle(fichier, new Episode(format(fichier)));
 				int index = getIndexVideo(sub.getEpisode().getEpisode(), videos);
-				videos.get(index).setSub(sub);
+				videos.get(index-1).setSub(sub);
 			}
 		}
 		Fenetre.update();
 	}
 	
 	private static int getIndexVideo(int episode, List<Video> videos){
-		if(videos.get(episode).getEpisode().getEpisode() == episode){
+		if(videos.get(episode-1).getEpisode().getEpisode() == episode){
 			return episode;
 		}
 		else{
-			if(videos.get(episode).getEpisode().getEpisode() > episode){
-				for(int i = episode; i > 0 ; i--){
+			if(videos.get(episode-1).getEpisode().getEpisode() > episode){
+				for(int i = episode-1; i > 0 ; i--){
 					if(videos.get(i).getEpisode().getEpisode() == episode){
 						return i;
 					}
 				}
 			}
 			else{
-				for(int i = 0; i < episode ; i++){
+				for(int i = 0; i < episode-1 ; i++){
 					if(videos.get(i).getEpisode().getEpisode() == episode){
 						return i;
 					}					

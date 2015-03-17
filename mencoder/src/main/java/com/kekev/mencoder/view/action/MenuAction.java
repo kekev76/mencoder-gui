@@ -48,7 +48,7 @@ public class MenuAction implements ActionListener {
 			break;
 
 		case "Convert":
-			Thread t = new ExecuteMencoder(VideoService.getInstance().findLastVideo().get(1));
+			Thread t = new ExecuteMencoder();
 			t.start();
 			Fenetre.update();
 		default:

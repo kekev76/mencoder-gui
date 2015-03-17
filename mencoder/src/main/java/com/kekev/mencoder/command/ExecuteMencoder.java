@@ -5,20 +5,25 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.kekev.mencoder.entity.Video;
+import com.kekev.mencoder.services.VideoService;
 
 public class ExecuteMencoder extends Thread{
 	
 	private static final String COMMAND = "./ressources/mencoderAvi.sh";
 	
-	private Video video;
 	
-	public ExecuteMencoder(Video video){
-		this.video = video;
+	public void run(){
+		for(Video video : VideoService.getInstance().findLastVideo()){
+			convert(video);
+			
+		}
 	}
 	
-	public void run(){ 	
+	public void convert(Video video){ 	
 		try{
 			
 			String videoOriginPath = video.getPathToVideo()+"/"+video.getTitle();
@@ -41,11 +46,28 @@ public class ExecuteMencoder extends Thread{
 	
 	        while ((line = buf_reader.readLine ()) != null)
 	        {
-	            System.out.println (line);
+	        	System.out.println(line);
+	            if(format(line)!=null){
+	            	video.setStatus(Integer.valueOf(format(line).replace(" ", "")));
+	            }
 	        }
+	        video.setEnding(true);
 	    }catch(Exception e){
 	        e.printStackTrace();
 	    }
+	}
+	
+	private String format(String line){
+		Pattern pattern = Pattern.compile("\\(..%\\)");
+		Matcher matcher = pattern.matcher(line);
+		if( matcher.find()){
+			pattern = Pattern.compile("(\\s|\\d)\\d");
+			matcher = pattern.matcher(matcher.group(0));
+			if( matcher.find()){
+				return matcher.group(0);
+			}
+		}
+		return null;
 	}
 
 }
