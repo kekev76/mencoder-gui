@@ -2,6 +2,7 @@ package com.kekev.mencoder.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
 
 import com.kekev.mencoder.entity.Subtitle;
 import com.kekev.mencoder.entity.Video;
@@ -28,11 +29,16 @@ public class VideoService {
 	}
 	
 	public synchronized void addVideo(String title, String subTitle){
-		videos.add(new Video(title, new Subtitle(subTitle)));		
+		addVideo(new Video(title, new Subtitle(subTitle)));
 	}
 	
 	public synchronized void addVideo(Video video){
-		videos.add(video);
+		videos.add(video);	
+		sort();
+	}
+	
+	private void sort(){
+		Collections.sort(videos);
 	}
 
 }

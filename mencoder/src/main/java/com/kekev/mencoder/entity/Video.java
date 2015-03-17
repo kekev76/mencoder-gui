@@ -1,6 +1,6 @@
 package com.kekev.mencoder.entity;
 
-public class Video {
+public class Video implements Comparable<Video>{
 	
 	private String title;
 	private Subtitle sub;
@@ -59,6 +59,11 @@ public class Video {
 
 	public void setState(State state) {
 		this.state = state;
+	}
+
+	@Override
+	public int compareTo(Video o) {
+		return title.compareTo(o.getTitle());
 	}
 	
 	
