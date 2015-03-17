@@ -4,18 +4,21 @@ public class Video {
 	
 	private String title;
 	private Subtitle sub;
+	private State state;
 	private static String pathToVideo;
 	private boolean ending = false;
 
 	public Video(String title) {
 		super();
 		this.title = title;
+		state = State.WAIT;
 	}
 	
 	public Video(String title, Subtitle sub) {
 		super();
 		this.title = title;
 		this.sub = sub;
+		state = State.WAIT;
 	}
 
 	public String getTitle() {
@@ -49,4 +52,14 @@ public class Video {
 	public void setSub(Subtitle sub) {
 		this.sub = sub;
 	}
+
+	public State getState() {
+		return state;
+	}
+
+	public void setState(State state) {
+		this.state = state;
+	}
+	
+	
 }
