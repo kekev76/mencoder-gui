@@ -26,16 +26,19 @@ public class MenuAction implements ActionListener {
 			final JFileChooser fcVideo = new JFileChooser();
 			fcVideo.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 			fcVideo.showOpenDialog(parent);
-			Video.setPathToVideo(fcVideo.getSelectedFile().getAbsolutePath());
+			if(fcVideo.getSelectedFile() != null)
+				Video.setPathToVideo(fcVideo.getSelectedFile().getAbsolutePath());
 			break;
 		case "Add Subs":
 			final JFileChooser fcSub = new JFileChooser();
 			fcSub.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 			fcSub.showOpenDialog(parent);
-			Subtitle.setPath(fcSub.getSelectedFile().getAbsolutePath());
+			if(fcSub.getSelectedFile() != null)
+				Subtitle.setPath(fcSub.getSelectedFile().getAbsolutePath());
 			break;
 		case "Retrieve":
 			Retrieve.RetrieveVideo();
+			Retrieve.RetrieveSub();
 			break;
 
 		default:

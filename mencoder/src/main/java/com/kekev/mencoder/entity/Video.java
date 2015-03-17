@@ -5,6 +5,7 @@ public class Video implements Comparable<Video>{
 	private String title;
 	private Subtitle sub;
 	private State state;
+	private Episode episode;
 	private static String pathToVideo;
 	private boolean ending = false;
 
@@ -18,6 +19,21 @@ public class Video implements Comparable<Video>{
 		super();
 		this.title = title;
 		this.sub = sub;
+		state = State.WAIT;
+	}
+	
+	public Video(String title, Episode episode) {
+		super();
+		this.title = title;
+		this.episode = episode;
+		state = State.WAIT;
+	}
+	
+	public Video(String title, Subtitle sub, Episode episode) {
+		super();
+		this.title = title;
+		this.sub = sub;
+		this.episode = episode;
 		state = State.WAIT;
 	}
 
@@ -59,6 +75,14 @@ public class Video implements Comparable<Video>{
 
 	public void setState(State state) {
 		this.state = state;
+	}
+	
+	public Episode getEpisode() {
+		return episode;
+	}
+
+	public void setEpisode(Episode episode) {
+		this.episode = episode;
 	}
 
 	@Override

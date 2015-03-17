@@ -1,8 +1,9 @@
 package com.kekev.mencoder.entity;
 
-public class Subtitle {
+public class Subtitle implements Comparable<Subtitle>{
 	
 	private String title;
+	private Episode episode;
 	private static String path;
 	
 	
@@ -10,7 +11,12 @@ public class Subtitle {
 		super();
 		this.title = title;
 	}
-
+	
+	public Subtitle(String title, Episode episode) {
+		super();
+		this.title = title;
+		this.episode = episode;
+	}
 
 	public String getTitle() {
 		return title;
@@ -29,6 +35,19 @@ public class Subtitle {
 
 	public static  void setPath(String path) {
 		Subtitle.path = path;
+	}
+
+	public Episode getEpisode() {
+		return episode;
+	}
+
+	public void setEpisode(Episode episode) {
+		this.episode = episode;
+	}
+
+	@Override
+	public int compareTo(Subtitle o) {
+		return title.compareTo(o.getTitle());
 	}
 	
 	
