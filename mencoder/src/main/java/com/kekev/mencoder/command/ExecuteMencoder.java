@@ -6,14 +6,30 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
+import com.kekev.mencoder.entity.Video;
+
 public class ExecuteMencoder extends Thread{
 	
-	private static final String COMMAND = "ping -c 3 google.com";
+	private static final String COMMAND = "./ressources/mencoderAvi.sh";
+	
+	private Video video;
+	
+	public ExecuteMencoder(Video video){
+		this.video = video;
+	}
 	
 	public void run(){ 	
 		try{
-	        Process p = Runtime.getRuntime().exec(COMMAND);
+			
+			String videoOriginPath = video.getPathToVideo()+"/"+video.getTitle();
+			String subOriginPath = video.getSub().getPath()+"/"+video.getSub().getTitle();
+			String videofinalPath = "/tmp/"+video.getTitle().replace(".mp4", ".avi");
+			
+			System.out.println ("Command Execute : "+COMMAND+ " " + videoOriginPath + " " + subOriginPath + " " + videofinalPath);
+			
+	        Process p = Runtime.getRuntime().exec(COMMAND+ " " + videoOriginPath + " " + subOriginPath + " " + videofinalPath);
 	
+			 
 	        OutputStream fout= p.getOutputStream();
 	        OutputStream bout= new BufferedOutputStream(fout);
 	        OutputStreamWriter out = new OutputStreamWriter(bout);

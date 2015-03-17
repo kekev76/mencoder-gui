@@ -17,15 +17,21 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.KeyStroke;
 
+import com.kekev.mencoder.entity.Subtitle;
+import com.kekev.mencoder.entity.Video;
 import com.kekev.mencoder.view.action.MenuAction;
 
 public class Fenetre {
 
 	private static final String TITLE = "mencoder";
+	private static final String VIDEO = "Video : ";
+	private static final String SUB = "Sub : ";
 	
 	private VideosModel model;
 	private JTable table;
 	private JFrame frame;
+	private static JLabel labelVideo;
+	private static JLabel labelSub;
 	
 	public static Fenetre fenetre;
 	
@@ -45,6 +51,15 @@ public class Fenetre {
 		table = new JTable(model);
 
 		frame.getContentPane().add(new JScrollPane(table), BorderLayout.CENTER);
+		
+		labelVideo = new JLabel(VIDEO);
+		labelSub = new JLabel(SUB);
+		
+		JPanel panelHead = new JPanel(new GridLayout(2,0));
+		panelHead.add(labelVideo);
+		panelHead.add(labelSub);
+		
+		frame.getContentPane().add(panelHead, BorderLayout.NORTH);
 		//4. Size the frame.
 		frame.setSize(1000,600);
 		
@@ -56,6 +71,8 @@ public class Fenetre {
 	
 	public static void update(){
 		fenetre.model.fireTableDataChanged();
+		labelVideo.setText(VIDEO+Video.getPathToVideo());
+		labelSub.setText(SUB+Subtitle.getPath());
 	}
 	
 	private JMenuBar createMenuBar(){

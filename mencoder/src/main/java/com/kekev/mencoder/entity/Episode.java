@@ -13,13 +13,11 @@ public class Episode {
 		Matcher matcher = pattern.matcher(scheme);
 		if( matcher.find()){
 			saison = Integer.valueOf(matcher.group(0).replaceFirst("S", ""));
-			System.out.println("Saison:"+saison+"|"+matcher.group(0).replaceFirst("S", ""));
 		}
 		pattern = Pattern.compile("E\\d\\d");
 		matcher = pattern.matcher(scheme);
 		if( matcher.find()){
 			episode = Integer.valueOf(matcher.group(0).replaceFirst("E", ""));
-			System.out.println("Episode"+episode+"|"+matcher.group(0).replaceFirst("E", ""));
 		}
 	}
 	

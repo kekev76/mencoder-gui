@@ -7,9 +7,12 @@ import java.io.File;
 
 import javax.swing.JFileChooser;
 
+import com.kekev.mencoder.command.ExecuteMencoder;
 import com.kekev.mencoder.entity.Subtitle;
 import com.kekev.mencoder.entity.Video;
 import com.kekev.mencoder.services.Retrieve;
+import com.kekev.mencoder.services.VideoService;
+import com.kekev.mencoder.view.Fenetre;
 
 public class MenuAction implements ActionListener {
 	
@@ -28,6 +31,7 @@ public class MenuAction implements ActionListener {
 			fcVideo.showOpenDialog(parent);
 			if(fcVideo.getSelectedFile() != null)
 				Video.setPathToVideo(fcVideo.getSelectedFile().getAbsolutePath());
+			Fenetre.update();
 			break;
 		case "Add Subs":
 			final JFileChooser fcSub = new JFileChooser();
@@ -35,12 +39,18 @@ public class MenuAction implements ActionListener {
 			fcSub.showOpenDialog(parent);
 			if(fcSub.getSelectedFile() != null)
 				Subtitle.setPath(fcSub.getSelectedFile().getAbsolutePath());
+			Fenetre.update();
 			break;
 		case "Retrieve":
 			Retrieve.RetrieveVideo();
 			Retrieve.RetrieveSub();
+			Fenetre.update();
 			break;
 
+		case "Convert":
+			Thread t = new ExecuteMencoder(VideoService.getInstance().findLastVideo().get(1));
+			t.start();
+			Fenetre.update();
 		default:
 			break;
 		}

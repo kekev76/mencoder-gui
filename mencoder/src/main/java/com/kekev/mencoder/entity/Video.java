@@ -1,5 +1,8 @@
 package com.kekev.mencoder.entity;
 
+import java.io.File;
+import java.io.FileFilter;
+
 public class Video implements Comparable<Video>{
 	
 	private String title;
@@ -51,6 +54,17 @@ public class Video implements Comparable<Video>{
 
 	public static void setPathToVideo(String pathToVideo) {
 		Video.pathToVideo = pathToVideo;
+		checkSrtDirectory();
+	}
+	
+	private static void checkSrtDirectory(){
+		File repository = new File(pathToVideo);
+		for(File file : repository.listFiles()){
+			if(file.isDirectory() && file.getName().equalsIgnoreCase("srt")){
+				Subtitle.setPath(file.getAbsolutePath());
+				return;
+			}
+		}
 	}
 	
 	public boolean isEnding() {

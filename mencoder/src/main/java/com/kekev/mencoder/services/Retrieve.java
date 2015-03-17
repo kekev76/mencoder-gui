@@ -51,7 +51,6 @@ public class Retrieve {
 		
 		for(String fichier : fichiers){
 			if(fichier.endsWith(".srt")){
-				System.out.println(fichier +":"+format(fichier));
 				Subtitle sub = new Subtitle(fichier, new Episode(format(fichier)));
 				int index = getIndexVideo(sub.getEpisode().getEpisode(), videos);
 				videos.get(index).setSub(sub);
@@ -61,7 +60,6 @@ public class Retrieve {
 	}
 	
 	private static int getIndexVideo(int episode, List<Video> videos){
-		System.out.println(episode);
 		if(videos.get(episode).getEpisode().getEpisode() == episode){
 			return episode;
 		}
