@@ -2,6 +2,8 @@ package com.kekev.mencoder.command;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -10,6 +12,7 @@ import java.util.regex.Pattern;
 
 import com.kekev.mencoder.entity.Video;
 import com.kekev.mencoder.services.VideoService;
+import com.kekev.mencoder.view.Fenetre;
 
 public class ExecuteMencoder extends Thread{
 	
@@ -34,7 +37,8 @@ public class ExecuteMencoder extends Thread{
 			
 	        Process p = Runtime.getRuntime().exec(COMMAND+ " " + videoOriginPath + " " + subOriginPath + " " + videofinalPath);
 	
-			 
+			
+	        
 	        OutputStream fout= p.getOutputStream();
 	        OutputStream bout= new BufferedOutputStream(fout);
 	        OutputStreamWriter out = new OutputStreamWriter(bout);
@@ -42,16 +46,24 @@ public class ExecuteMencoder extends Thread{
 	
 	        InputStreamReader reader = new InputStreamReader ( p.getInputStream() );
 	        BufferedReader buf_reader = new BufferedReader ( reader );
+	        
+	        InputStreamReader readerErr = new InputStreamReader ( p.getErrorStream() );
+	        BufferedReader buf_readerErr = new BufferedReader ( readerErr );
+	       
+	        (new OutputLine(buf_readerErr)).start();
 	        String line;
 	
 	        while ((line = buf_reader.readLine ()) != null)
 	        {
-	        	System.out.println(line);
 	            if(format(line)!=null){
 	            	video.setStatus(Integer.valueOf(format(line).replace(" ", "")));
 	            }
+		        System.out.println(line);
+	            
 	        }
+	        System.out.println("ok");
 	        video.setEnding(true);
+	        Fenetre.update();
 	    }catch(Exception e){
 	        e.printStackTrace();
 	    }
