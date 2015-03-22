@@ -37,7 +37,7 @@ public class VideoService {
 		sort();
 	}
 	
-	private void sort(){
+	private synchronized void sort(){
 		Collections.sort(videos);
 	}
 

@@ -58,10 +58,9 @@ public class ExecuteMencoder extends Thread{
 	            if(format(line)!=null){
 	            	video.setStatus(Integer.valueOf(format(line).replace(" ", "")));
 	            }
-		        System.out.println(line);
 	            
 	        }
-	        System.out.println("ok");
+	        video.setStatus(100);
 	        video.setEnding(true);
 	        Fenetre.update();
 	    }catch(Exception e){

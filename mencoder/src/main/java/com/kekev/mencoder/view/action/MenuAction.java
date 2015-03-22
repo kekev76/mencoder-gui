@@ -26,7 +26,7 @@ public class MenuAction implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		switch (arg0.getActionCommand()) {
 		case "Add Videos":
-			final JFileChooser fcVideo = new JFileChooser();
+			final JFileChooser fcVideo = new JFileChooser("/home/kevin/Vidéos");
 			fcVideo.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 			fcVideo.showOpenDialog(parent);
 			if(fcVideo.getSelectedFile() != null)
@@ -34,7 +34,7 @@ public class MenuAction implements ActionListener {
 			Fenetre.update();
 			break;
 		case "Add Subs":
-			final JFileChooser fcSub = new JFileChooser();
+			final JFileChooser fcSub = new JFileChooser((Video.getPathToVideo() != null) ? Video.getPathToVideo() : "/home/kevin/Vidéos");
 			fcSub.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 			fcSub.showOpenDialog(parent);
 			if(fcSub.getSelectedFile() != null)

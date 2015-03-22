@@ -52,7 +52,9 @@ public class Retrieve {
 		for(String fichier : fichiers){
 			if(fichier.endsWith(".srt")){
 				Subtitle sub = new Subtitle(fichier, new Episode(format(fichier)));
+				System.out.println(sub.getTitle());
 				int index = getIndexVideo(sub.getEpisode().getEpisode(), videos);
+				System.out.println(index);
 				videos.get(index-1).setSub(sub);
 			}
 		}
@@ -60,11 +62,11 @@ public class Retrieve {
 	}
 	
 	private static int getIndexVideo(int episode, List<Video> videos){
-		if(videos.get(episode-1).getEpisode().getEpisode() == episode){
+		if(videos.size() >= episode-1 && videos.get(episode-1).getEpisode().getEpisode() == episode){
 			return episode;
 		}
 		else{
-			if(videos.get(episode-1).getEpisode().getEpisode() > episode){
+			if(videos.size() >= episode-1 && videos.get(episode-1).getEpisode().getEpisode() > episode){
 				for(int i = episode-1; i > 0 ; i--){
 					if(videos.get(i).getEpisode().getEpisode() == episode){
 						return i;
@@ -74,7 +76,7 @@ public class Retrieve {
 			else{
 				for(int i = 0; i < episode-1 ; i++){
 					if(videos.get(i).getEpisode().getEpisode() == episode){
-						return i;
+						return i + 1;
 					}					
 				}				
 			}
