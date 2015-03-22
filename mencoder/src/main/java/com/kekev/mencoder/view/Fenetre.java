@@ -113,6 +113,14 @@ public class Fenetre {
 		menu.add(menuItem);
 		menuBar.add(menu);
 		
+		menu = new JMenu("Setting");
+		menu.setMnemonic(KeyEvent.VK_E);
+		
+		menuItem = new JMenuItem("FTP");
+		menuItem.addActionListener(new MenuAction(frame));
+		menu.add(menuItem);
+		menuBar.add(menu);
+		
 		return menuBar;
 	}
 

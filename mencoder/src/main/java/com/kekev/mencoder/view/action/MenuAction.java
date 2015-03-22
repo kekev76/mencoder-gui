@@ -8,11 +8,13 @@ import java.io.File;
 import javax.swing.JFileChooser;
 
 import com.kekev.mencoder.command.ExecuteMencoder;
+import com.kekev.mencoder.command.transfert.FtpTransfert;
 import com.kekev.mencoder.entity.Subtitle;
 import com.kekev.mencoder.entity.Video;
 import com.kekev.mencoder.services.Retrieve;
 import com.kekev.mencoder.services.VideoService;
 import com.kekev.mencoder.view.Fenetre;
+import com.kekev.mencoder.view.FtpFormView;
 
 public class MenuAction implements ActionListener {
 	
@@ -51,6 +53,9 @@ public class MenuAction implements ActionListener {
 			Thread t = new ExecuteMencoder();
 			t.start();
 			Fenetre.update();
+			
+		case "FTP":
+			new FtpFormView();
 		default:
 			break;
 		}
