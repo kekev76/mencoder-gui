@@ -53,9 +53,10 @@ public class MenuAction implements ActionListener {
 			Thread t = new ExecuteMencoder();
 			t.start();
 			Fenetre.update();
-			
+			break;
 		case "FTP":
 			new FtpFormView();
+			break;
 		default:
 			break;
 		}

@@ -10,6 +10,7 @@ import java.io.OutputStreamWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.kekev.mencoder.command.transfert.FtpTransfert;
 import com.kekev.mencoder.entity.Video;
 import com.kekev.mencoder.services.VideoService;
 import com.kekev.mencoder.view.Fenetre;
@@ -20,9 +21,10 @@ public class ExecuteMencoder extends Thread{
 	
 	
 	public void run(){
+		FtpTransfert ftp = new FtpTransfert();
 		for(Video video : VideoService.getInstance().findLastVideo()){
 			convert(video);
-			
+			ftp.uploadFile(video);
 		}
 	}
 	
